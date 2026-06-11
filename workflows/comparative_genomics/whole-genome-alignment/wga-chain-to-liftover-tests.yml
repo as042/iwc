@@ -1,0 +1,21 @@
+# STUB test for wga-chain-to-liftover.ga — replace with real inputs/outputs.
+# Regenerate from a real invocation with:
+#   planemo workflow_test_init --from_invocation <invocation_id> --galaxy_url <url> --galaxy_user_key <key>
+- doc: TODO test chain -> net-filtered liftover chain
+  job:
+    TARGET_Sequence:
+      class: File
+      path: test-data/TODO_target.fasta
+      filetype: fasta
+    QUERY_Sequence:
+      class: File
+      path: test-data/TODO_query.fasta
+      filetype: fasta
+    chain:
+      class: File
+      path: test-data/TODO.chain
+  outputs:
+    liftover_chain_file:
+      asserts:
+        has_text:
+          text: "chain"

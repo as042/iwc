@@ -1,0 +1,23 @@
+# STUB test for wga-pairwise-align-and-liftover.ga — replace with real inputs/outputs.
+# This workflow is WIP (KegAlign inputs and FastGA->axtChain are not yet wired); fill in once
+# the wiring is finalized. Regenerate from a real invocation with:
+#   planemo workflow_test_init --from_invocation <invocation_id> --galaxy_url <url> --galaxy_user_key <key>
+- doc: TODO test pairwise align + liftover (KegAlign path) produces liftover chains
+  job:
+    TARGET_Sequence:
+      class: File
+      path: test-data/TODO_target.fasta
+      filetype: fasta
+    QUERY_Sequence:
+      class: File
+      path: test-data/TODO_query.fasta
+      filetype: fasta
+  outputs:
+    liftover_chain_file_normal:
+      asserts:
+        has_text:
+          text: "chain"
+    liftover_chain_file_reverse:
+      asserts:
+        has_text:
+          text: "chain"

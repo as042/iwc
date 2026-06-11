@@ -1,0 +1,26 @@
+# Each `primaryDescriptorPath` must point at a `.ga` file that exists in this folder, and each
+# `testParameterFiles` entry at its matching `-tests.yml`. Dockstore CI fails on a descriptor
+# path with no corresponding file. Add new entries here as further workflows
+# (distance matrix, neighbor-joining tree, MSA, top-level orchestrator) are added.
+version: 1.2
+workflows:
+- name: wga-pairwise-align-and-liftover
+  subclass: Galaxy
+  publish: true
+  primaryDescriptorPath: /wga-pairwise-align-and-liftover.ga
+  testParameterFiles:
+  - /wga-pairwise-align-and-liftover-tests.yml
+  authors:
+  - name: Penn State University
+  - name: Martin Čech
+    orcid: 0000-0002-9318-1781
+- name: wga-chain-to-liftover
+  subclass: Galaxy
+  publish: true
+  primaryDescriptorPath: /wga-chain-to-liftover.ga
+  testParameterFiles:
+  - /wga-chain-to-liftover-tests.yml
+  authors:
+  - name: Penn State University
+  - name: Martin Čech
+    orcid: 0000-0002-9318-1781

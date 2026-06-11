@@ -1,0 +1,769 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Take a pairwise alignment (from Batched LASTZ / KegAlign) plus a chain and construct net-filtered liftover chains. Intended for use as a subworkflow of WGA: pairwise align and liftover.",
+    "comments": [
+        {
+            "child_comments": [
+                1
+            ],
+            "child_steps": [
+                0,
+                1
+            ],
+            "color": "blue",
+            "data": {
+                "title": ""
+            },
+            "id": 0,
+            "position": [
+                0,
+                340
+            ],
+            "size": [
+                370,
+                325
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Input Chain"
+            },
+            "id": 2,
+            "position": [
+                830,
+                340
+            ],
+            "size": [
+                260,
+                140
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                15
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "LiftOver output"
+            },
+            "id": 3,
+            "position": [
+                3100,
+                750
+            ],
+            "size": [
+                250,
+                240
+            ],
+            "type": "frame"
+        },
+        {
+            "color": "none",
+            "data": {
+                "text": "Assemblies in fasta format, masked. "
+            },
+            "id": 1,
+            "position": [
+                20,
+                380
+            ],
+            "size": [
+                310,
+                55
+            ],
+            "type": "markdown"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "Penn State University",
+            "url": "https://www.ccbb.psu.edu/"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-9318-1781",
+            "name": "Martin \u010cech"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "WGA: chain to liftover",
+    "release": "0.1",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Assemblies in fasta format, masked. ",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Assemblies in fasta format, masked. ",
+                    "name": "TARGET_Sequence"
+                }
+            ],
+            "label": "TARGET_Sequence",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 80,
+                "top": 450
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2ed3977c-46af-40b8-b44a-50358f170bf0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Assemblies in fasta format, masked. ",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Assemblies in fasta format, masked. ",
+                    "name": "QUERY_Sequence"
+                }
+            ],
+            "label": "QUERY_Sequence",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 80,
+                "top": 560
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "7a799960-5ab0-4dc0-a6e3-adedfb7a784e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "chain"
+                }
+            ],
+            "label": "chain",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 850,
+                "top": 380
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "23f9ad80-3a5b-4acc-bc9a-9ab4cb91db47",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "TARGET trim sequence names",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 480,
+                "top": 440
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN{FS=\\\" \\\"} /^>/ {print $1; next} {print}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "435f4dc2-2547-439f-bafe-719842889e96",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "QUERY trim sequence names 2",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 480,
+                "top": 610
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN{FS=\\\" \\\"} /^>/ {print $1; next} {print}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"variables\": [], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "59f572cb-966a-43dd-bd7b-8035715149e6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "CONVERTER_fasta_to_2bit",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "target_2bit_step",
+            "name": "Convert FASTA to 2bit",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "twobit"
+                }
+            ],
+            "position": {
+                "left": 860,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "CONVERTER_fasta_to_2bit",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "80bf2ada-d494-450c-8679-e1f3aac66f9d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "ref|input": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compute sequence length",
+                    "name": "ref"
+                }
+            ],
+            "label": "target_compute_sequence_length",
+            "name": "Compute sequence length",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1240,
+                "top": 400
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "5cbde03c1103",
+                "name": "fasta_compute_length",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ref\": {\"ref_source\": \"history\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"keep_first\": \"0\", \"keep_first_word\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "397dfe96-3b62-4e12-a03e-1343303624fa",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "CONVERTER_fasta_to_2bit",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "query_2bit_step",
+            "name": "Convert FASTA to 2bit",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "twobit"
+                }
+            ],
+            "position": {
+                "left": 860,
+                "top": 170
+            },
+            "post_job_actions": {},
+            "tool_id": "CONVERTER_fasta_to_2bit",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "4d136ce2-3978-4ad5-9155-03ec5182c200",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.4",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "ref|input": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Compute sequence length",
+                    "name": "ref"
+                }
+            ],
+            "label": "query_compute_sequence_length",
+            "name": "Compute sequence length",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1240,
+                "top": 610
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "5cbde03c1103",
+                "name": "fasta_compute_length",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"ref\": {\"ref_source\": \"history\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"keep_first\": \"0\", \"keep_first_word\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "2474163b-b77a-4002-849e-cea479d686af",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainantirepeat/ucsc_chainantirepeat/482+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "in_chain": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "in_query": {
+                    "id": 7,
+                    "output_name": "output"
+                },
+                "in_target": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "chainantirepeat_step",
+            "name": "chainAntiRepeat",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "chain"
+                }
+            ],
+            "position": {
+                "left": 1240,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainantirepeat/ucsc_chainantirepeat/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9f2d2c96a189",
+                "name": "ucsc_chainantirepeat",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_chain\": {\"__class__\": \"ConnectedValue\"}, \"in_query\": {\"__class__\": \"ConnectedValue\"}, \"in_target\": {\"__class__\": \"ConnectedValue\"}, \"minScore\": null, \"noCheckScore\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "75c3613f-bf7e-4ffe-9c7a-b235bf845bda",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainprenet/ucsc_chainprenet/482+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "in_chain": {
+                    "id": 9,
+                    "output_name": "out"
+                },
+                "query_reference_index_source|in_que_ref_index": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "target_reference_index_source|in_tar_ref_index": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool chainPreNet",
+                    "name": "query_reference_index_source"
+                },
+                {
+                    "description": "runtime parameter for tool chainPreNet",
+                    "name": "target_reference_index_source"
+                }
+            ],
+            "label": "chainprenet_step",
+            "name": "chainPreNet",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "chain"
+                }
+            ],
+            "position": {
+                "left": 1590,
+                "top": 210
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainprenet/ucsc_chainprenet/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2a417e645e61",
+                "name": "ucsc_chainprenet",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_chain\": {\"__class__\": \"ConnectedValue\"}, \"inclHap\": false, \"pad\": null, \"query_reference_index_source\": {\"query_reference_index_source_selector\": \"history\", \"__current_case__\": 1, \"in_que_ref_index\": {\"__class__\": \"ConnectedValue\"}}, \"target_reference_index_source\": {\"target_reference_index_source_selector\": \"history\", \"__current_case__\": 1, \"in_tar_ref_index\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "cdb454cb-3df3-4137-a77f-cbd02f229c27",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainsort/ucsc_chainsort/482+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "in_chain": {
+                    "id": 10,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": "chainsort_step",
+            "name": "chainSort",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "chain"
+                }
+            ],
+            "position": {
+                "left": 1890,
+                "top": 370
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainsort/ucsc_chainsort/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "07c87c2ab74b",
+                "name": "ucsc_chainsort",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_chain\": {\"__class__\": \"ConnectedValue\"}, \"sort_by\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "5f863c65-f464-4753-bbca-c22a557fa549",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainnet/ucsc_chainnet/482+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "in_chain": {
+                    "id": 11,
+                    "output_name": "out"
+                },
+                "query_reference_index_source|in_que_ref_index": {
+                    "id": 8,
+                    "output_name": "output"
+                },
+                "target_reference_index_source|in_tar_ref_index": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool chainNet",
+                    "name": "query_reference_index_source"
+                },
+                {
+                    "description": "runtime parameter for tool chainNet",
+                    "name": "target_reference_index_source"
+                }
+            ],
+            "label": "chainne_step",
+            "name": "chainNet",
+            "outputs": [
+                {
+                    "name": "targetNet",
+                    "type": "ucsc.net"
+                },
+                {
+                    "name": "queryNet",
+                    "type": "ucsc.net"
+                }
+            ],
+            "position": {
+                "left": 2190,
+                "top": 500
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_chainnet/ucsc_chainnet/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5b65a92be96c",
+                "name": "ucsc_chainnet",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_chain\": {\"__class__\": \"ConnectedValue\"}, \"inclHap\": false, \"minFill\": null, \"minScore\": null, \"minSpace\": null, \"query_reference_index_source\": {\"query_reference_index_source_selector\": \"history\", \"__current_case__\": 1, \"in_que_ref_index\": {\"__class__\": \"ConnectedValue\"}}, \"target_reference_index_source\": {\"target_reference_index_source_selector\": \"history\", \"__current_case__\": 1, \"in_tar_ref_index\": {\"__class__\": \"ConnectedValue\"}}, \"verbose\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "82f9d72d-09d8-4867-978b-22749777ed83",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netsyntenic/ucsc_netsyntenic/482+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "in_net": {
+                    "id": 12,
+                    "output_name": "targetNet"
+                }
+            },
+            "inputs": [],
+            "label": "netsyntenic_step",
+            "name": "netSyntenic",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "ucsc.net"
+                }
+            ],
+            "position": {
+                "left": 2490,
+                "top": 650
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netsyntenic/ucsc_netsyntenic/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1999f87602f7",
+                "name": "ucsc_netsyntenic",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_net\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "d3436ddd-b168-4d96-aac3-fbb48227234b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netfilter/ucsc_netfilter/482+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "in_net": {
+                    "id": 13,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": "netfilter_step",
+            "name": "netFilter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "ucsc.net"
+                }
+            ],
+            "position": {
+                "left": 2790,
+                "top": 670
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netfilter/ucsc_netfilter/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5c3fa42d003f",
+                "name": "ucsc_netfilter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_net\": {\"__class__\": \"ConnectedValue\"}, \"minGap\": null, \"synteny\": {\"syn_filter\": \"filtersyn\", \"__current_case__\": 1, \"syntype\": \"-syn\", \"minSynScore\": null, \"minSynSize\": null, \"minSynAli\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "05ef4789-7838-45cd-a4fb-de7eb8172659",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netchainsubset/ucsc_netchainsubset/482+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "in_chain": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "in_net": {
+                    "id": 14,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [],
+            "label": "netchainsubset_step",
+            "name": "netChainSubset",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "chain"
+                }
+            ],
+            "position": {
+                "left": 3120,
+                "top": 800
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ucsc_netchainsubset/ucsc_netchainsubset/482+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "794cf52edccc",
+                "name": "ucsc_netchainsubset",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_chain\": {\"__class__\": \"ConnectedValue\"}, \"in_net\": {\"__class__\": \"ConnectedValue\"}, \"skipMissing\": false, \"splitOnInsert\": false, \"wholeChains\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "482+galaxy0",
+            "type": "tool",
+            "uuid": "546367b7-be61-4515-8a65-77765277cd08",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "liftover_chain_file",
+                    "output_name": "out",
+                    "uuid": "86f463ac-a6ff-4da8-b81a-3fd0e4d5ce76"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "ucsc",
+        "alignment",
+        "lastz",
+        "kegalign",
+        "chain",
+        "net"
+    ],
+    "uuid": "1b3c4b48-ac18-4781-b146-38c9422b007b",
+    "version": 1
+}
